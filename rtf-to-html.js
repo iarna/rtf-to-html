@@ -28,6 +28,7 @@ body {
   margin-top: ${doc.marginTop / 20}pt;
   margin-bottom: ${doc.marginBottom /20}pt;
   font-family: ${defaults.font.name.replace(/-\w+$/,'')}, ${genericFontMap[defaults.font.family]};
+  font-size: ${defaults.fontSize / 2}pt;
   text-indent: ${defaults.firstLineIndent / 20}pt;
 }
 </style>
