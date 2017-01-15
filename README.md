@@ -2,7 +2,7 @@
 
 Convert RTF to HTML in pure JavaScript.
 
-```
+```js
 const rtfToHTML = require('@iarna/rtf-to-html')
 
 fs.createReadStream('example.rtf').pipe(rtfToHTML((err, html) => {
