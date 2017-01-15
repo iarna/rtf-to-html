@@ -51,8 +51,6 @@ const genericFontMap = {
 }
 
 function colorEq (aa, bb) {
-  if (!aa && !bb) return true
-  if (!bb) return false
   return aa.red === bb.red && aa.blue === bb.blue && aa.green === bb.green
 }
 
@@ -117,7 +115,11 @@ function renderPara (para, defaults) {
   if (para.content.length === 0) return
   const style = CSS(para, defaults)
   const tags = styleTags(para, defaults)
-  return `<p${style ? ' style="' + style + '"' : ''}>${tags.open}${para.content.map(span => renderSpan(span, Object.assign({}, defaults, para.style))).join('')}${tags.close}</p>`
+  const pdefaults = Object.assign({}, defaults)
+  for (let item of Object.keys(para.style)) {
+    if (para.style[item] != null) pdefaults[item] = para.style[item]
+  }
+  return `<p${style ? ' style="' + style + '"' : ''}>${tags.open}${para.content.map(span => renderSpan(span, pdefaults)).join('')}${tags.close}</p>`
 }
 
 function renderSpan (span, defaults) {
