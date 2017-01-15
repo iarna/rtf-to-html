@@ -3,7 +3,7 @@ module.exports = rtfToHTML
 
 function rtfToHTML (doc) {
   const defaults = {
-    font: doc.style.font || {name: 'Times', family: 'roman'},
+//    font: doc.style.font || {name: 'Times', family: 'roman'},
     fontSize: doc.style.fontSize || 24,
     bold: false,
     italic: false,
@@ -17,6 +17,7 @@ function rtfToHTML (doc) {
     valign: 'normal'
   }
   const content = doc.content.map(para => renderPara(para, defaults)).filter(html => html != null).join('\n\n')
+//  ${font(defaults.font)};
   return `<!DOCTYPE html>
 <html>
 <head>
@@ -27,7 +28,6 @@ body {
   margin-right: ${doc.marginRight / 20}pt;
   margin-top: ${doc.marginTop / 20}pt;
   margin-bottom: ${doc.marginBottom /20}pt;
-  font-family: ${defaults.font.name.replace(/-\w+$/,'')}, ${genericFontMap[defaults.font.family]};
   font-size: ${defaults.fontSize / 2}pt;
   text-indent: ${defaults.firstLineIndent / 20}pt;
 }
@@ -38,6 +38,13 @@ ${content}
 </body>
 </html>
 `
+}
+
+function font (ft) {
+  const name = ft.name.replace(/-\w+$/,'')
+  const family = genericFontMap[ft.family]
+  if (name === 'ZapfDingbatsITC') return ''
+  return 'font-family: ' + name + (family ? `, ${family}` : '')
 }
 
 const genericFontMap = {
@@ -74,9 +81,9 @@ function CSS (chunk, defaults) {
   if (chunk.style.fontSize != null && chunk.style.fontSize !== defaults.fontSize) {
     css += `font-size: ${chunk.style.fontSize / 2}pt;`
   }
-  if (chunk.style.font != null && chunk.style.font.name !== defaults.font.name) {
-    css += `font-family: ${chunk.style.font.name.replace(/-\w+$/,'')}, ${genericFontMap[chunk.style.font.family]};`
-  }
+//  if (chunk.style.font != null && chunk.style.font.name !== defaults.font.name) {
+//    css += font(chunk.style.font)
+//  }
   return css
 }
 
