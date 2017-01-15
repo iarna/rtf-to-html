@@ -3,15 +3,15 @@ module.exports = rtfToHTML
 
 function rtfToHTML (doc) {
   const defaults = {
-    font: doc.content[0].style.font || {name: 'Times', family: 'roman'},
-    fontSize: doc.content[0].style.fontSize || 24,
+    font: doc.style.font || {name: 'Times', family: 'roman'},
+    fontSize: doc.style.fontSize || 24,
     bold: false,
     italic: false,
     underline: false,
     strikethrough: false,
     foreground: {red: 0, blue: 0, green: 0},
     background: {red: 255, blue: 255, green: 255},
-    firstLineIndent: doc.content[0].style.firstLineIndent || 0,
+    firstLineIndent: doc.style.firstLineIndent || 0,
     indent: 0,
     align: 'left',
     valign: 'normal'
