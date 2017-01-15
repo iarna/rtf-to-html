@@ -19,22 +19,22 @@ function rtfToHTML (doc) {
   const content = doc.content.map(para => renderPara(para, defaults)).filter(html => html != null).join('\n\n')
   return `<!DOCTYPE html>
 <html>
- <head>
-  <meta charset="UTF-8">
-  <style>
-    body {
-      margin-left: ${doc.marginLeft / 20}pt;
-      margin-right: ${doc.marginRight / 20}pt;
-      margin-top: ${doc.marginTop / 20}pt;
-      margin-bottom: ${doc.marginBottom /20}pt;
-      font-family: ${defaults.font.name.replace(/-\w+$/,'')}, ${genericFontMap[defaults.font.family]};
-      text-indent: ${defaults.firstLineIndent / 20}pt;
-    }
-  </style>
- </head>
- <body>
+<head>
+<meta charset="UTF-8">
+<style>
+body {
+  margin-left: ${doc.marginLeft / 20}pt;
+  margin-right: ${doc.marginRight / 20}pt;
+  margin-top: ${doc.marginTop / 20}pt;
+  margin-bottom: ${doc.marginBottom /20}pt;
+  font-family: ${defaults.font.name.replace(/-\w+$/,'')}, ${genericFontMap[defaults.font.family]};
+  text-indent: ${defaults.firstLineIndent / 20}pt;
+}
+</style>
+</head>
+<body>
 ${content}
- </body>
+</body>
 </html>
 `
 }
