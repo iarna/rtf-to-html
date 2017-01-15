@@ -1,0 +1,28 @@
+{
+  "name": "@iarna/rtf-to-html",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Rebecca Turner <me@re-becca.org> (http://re-becca.org/)",
+  "license": "ISC",
+  "dependencies": {
+    "rtf-parser": "^1.0.1"
+  },
+  "devDependencies": {},
+  "description": "Convert RTF to HTML in pure JavaScript.",
+  "files": [
+    "index.js",
+    "rtf-to-html.js"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iarna/rtf-to-html.git"
+  },
+  "bugs": {
+    "url": "https://github.com/iarna/rtf-to-html/issues"
+  },
+  "homepage": "https://npmjs.com/package/@iarna/rtf-to-html"
+}
