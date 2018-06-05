@@ -1,7 +1,7 @@
 'use strict'
 module.exports = rtfToHTML
 
-function rtfToHTML (doc) {
+function rtfToHTML (doc, options) {
   const defaults = {
 //    font: doc.style.font || {name: 'Times', family: 'roman'},
     fontSize: doc.style.fontSize || 24,
@@ -14,30 +14,12 @@ function rtfToHTML (doc) {
     firstLineIndent: doc.style.firstLineIndent || 0,
     indent: 0,
     align: 'left',
-    valign: 'normal'
+    valign: 'normal',
+
+    options: options
   }
-  const content = doc.content.map(para => renderPara(para, defaults)).filter(html => html != null).join('\n\n')
-//  ${font(defaults.font)};
-  return `<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<style>
-body {
-  margin-left: ${doc.marginLeft / 20}pt;
-  margin-right: ${doc.marginRight / 20}pt;
-  margin-top: ${doc.marginTop / 20}pt;
-  margin-bottom: ${doc.marginBottom /20}pt;
-  font-size: ${defaults.fontSize / 2}pt;
-  text-indent: ${defaults.firstLineIndent / 20}pt;
-}
-</style>
-</head>
-<body>
-${content}
-</body>
-</html>
-`
+  const content = doc.content.map(para => renderPara(para, defaults)).filter(html => html != null).join(options.lineBreaks)
+  return options.template(doc, defaults, content)
 }
 
 function font (ft) {
@@ -126,7 +108,8 @@ function renderPara (para, defaults) {
   for (let item of Object.keys(para.style)) {
     if (para.style[item] != null) pdefaults[item] = para.style[item]
   }
-  return `<p${style ? ' style="' + style + '"' : ''}>${tags.open}${para.content.map(span => renderSpan(span, pdefaults)).join('')}${tags.close}</p>`
+  let paragraphTag = defaults.options.paragraphTag
+  return `<${paragraphTag}${style ? ' style="' + style + '"' : ''}>${tags.open}${para.content.map(span => renderSpan(span, pdefaults)).join('')}${tags.close}</${paragraphTag}>`
 }
 
 function renderSpan (span, defaults) {
