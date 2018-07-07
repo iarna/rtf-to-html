@@ -101,7 +101,7 @@ function styleTags (chunk, defaults) {
 }
 
 function renderPara (para, defaults) {
-  if (para.content.length === 0) return
+  if (!para.content || para.content.length === 0) return
   const style = CSS(para, defaults)
   const tags = styleTags(para, defaults)
   const pdefaults = Object.assign({}, defaults)
