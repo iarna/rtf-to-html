@@ -3,7 +3,7 @@ module.exports = rtfToHTML
 
 function rtfToHTML (doc, options) {
   const defaults = {
-//    font: doc.style.font || {name: 'Times', family: 'roman'},
+    //    font: doc.style.font || {name: 'Times', family: 'roman'},
     fontSize: doc.style.fontSize || 24,
     bold: false,
     italic: false,
@@ -23,7 +23,7 @@ function rtfToHTML (doc, options) {
 }
 
 function font (ft) {
-  const name = ft.name.replace(/-\w+$/,'')
+  const name = ft.name.replace(/-\w+$/, '')
   const family = genericFontMap[ft.family]
   if (name === 'ZapfDingbatsITC') return ''
   return 'font-family: ' + name + (family ? `, ${family}` : '')

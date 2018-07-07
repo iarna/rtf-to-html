@@ -3,7 +3,13 @@
   "version": "1.0.3",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"no test specified\"",
+    "prerelease": "npm t",
+    "release": "standard-version -s",
+    "postrelease": "npm publish && git push --follow-tags",
+    "pretest": "standard",
+    "update-coc": "weallbehave -o . && git add CODE_OF_CONDUCT.md && git commit -m 'docs(coc): updated CODE_OF_CONDUCT.md'",
+    "update-contrib": "weallcontribute -o . && git add CONTRIBUTING.md && git commit -m 'docs(contributing): updated CONTRIBUTING.md'"
   },
   "keywords": [],
   "author": "Rebecca Turner <me@re-becca.org> (http://re-becca.org/)",
@@ -11,7 +17,13 @@
   "dependencies": {
     "rtf-parser": "^1.0.4"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "weallbehave": "*",
+    "weallcontribute": "*",
+    "standard": "*",
+    "standard-version": "*",
+    "tap": "*"
+  },
   "description": "Convert RTF to HTML in pure JavaScript.",
   "files": [
     "index.js",
