@@ -1,6 +1,6 @@
 {
   "name": "@iarna/rtf-to-html",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "main": "index.js",
   "scripts": {
     "test": "echo \"no test specified\"",
