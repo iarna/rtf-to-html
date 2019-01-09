@@ -43,7 +43,14 @@ function rtfToHTML (doc, options) {
     paraTag: 'p',
     template: outputTemplate
   }, options || {})
-  const content = doc.content.map(para => renderPara(para, defaults)).filter(html => html != null).join(defaults.paraBreaks)
+  const content = doc.content.map(
+    function (para) {
+      if (para.content) {
+        return renderPara(para, defaults);
+      }
+      return renderPara({content: [para], style: {}}, defaults);
+    }
+  ).filter(html => html != null).join(defaults.paraBreaks)
   return defaults.template(doc, defaults, content)
 }
 
